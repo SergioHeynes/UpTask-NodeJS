@@ -5,6 +5,16 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+// Crear la conexión con la base de datos
+const db = require('./config/db');
+
+//importar el modelo
+require('./models/Proyectos');
+
+db.sync()
+    .then(() => console.log('Conectado al servidor'))
+    .catch((error) => console.log(error));
+
 app.set('view engine', 'pug');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
