@@ -83,3 +83,6 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 node_modules
+
+# MyNotes
+myNotesAboutTheProject.txt
