@@ -2,7 +2,10 @@ const Proyectos = require('../models/Proyectos');
 
 exports.proyectosHome = async (req, res) => {
     const proyectos = await Proyectos.findAll();
-    res.render("index", {nombrePagina: 'Proyecto', proyectos});
+    res.render("index", {
+        nombrePagina: 'Proyectos', 
+        proyectos
+    });
 };
 
 exports.formularioProyecto = async (req, res) => {
@@ -106,5 +109,16 @@ exports.actualizarProyecto = async (req, res) => {
         );
         res.redirect("/");
     }
-};
+}
+
+exports.eliminarProyecto = async (req, res, next) => {
+    const {urlProyecto} = req.query;
+
+    const resultado = await Proyectos.destroy({where: { url : urlProyecto}});
+
+    if(!resultado) {
+        return next();
+    }
+    res.status(200).send("Proyecto eliminado correctamente.")
+}
 
